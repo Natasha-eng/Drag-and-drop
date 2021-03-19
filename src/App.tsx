@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {DragEvent, MouseEvent} from 'react';
+import './App.module.css';
+import style from './App.module.css'
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "./redux/store";
+import {
+    addFigure,
+    CanvasItemType,
+    changeCanvasStatus,
+    changeFigureStyle, chooseFigure, deleteFigure,
+    dragStarted,
+    ItemType
+} from "./redux/DnDReducer";
+import {DndFigure} from "./components/DndFigure";
+import {CanvasField} from "./components/CanvasField";
+import {Field} from "./components/Field";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const figures = useSelector<RootStateType, Array<ItemType>>(state => state.dndFigures.items)
+    const canvasItems = useSelector<RootStateType, Array<CanvasItemType>>(state => state.dndFigures.canvasItems)
+    const canvasFigureId = useSelector<RootStateType, string>(state => state.dndFigures.canvasFigureId)
+
+    const dispatch = useDispatch()
+
+    const deleteItemHandler = () => {
+        dispatch(deleteFigure(canvasFigureId))
+    }
+
+    return (
+        <div className={style.app}>
+            <button className={style.deleteButton} onClick={deleteItemHandler}>Delete Figure
+            </button>
+            <div className={style.fieldsContainer}>
+                <Field title={'Figures'} items={figures}/>
+                <CanvasField title={'Canvas'} items={canvasItems}/>
+            </div>
+        </div>
+    );
 }
 
 export default App;
+
+
+
+
+
+
+
+
