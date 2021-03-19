@@ -7,7 +7,7 @@ type CanvasFigurePropsType = {
     item: CanvasItemType
 }
 
-export const CanvasFigure = (props: CanvasFigurePropsType) => {
+export const CanvasFigure = React.memo((props: CanvasFigurePropsType) => {
 
     const dispatch = useDispatch()
 
@@ -25,4 +25,4 @@ export const CanvasFigure = (props: CanvasFigurePropsType) => {
             </div>
         </div>
     )
-}
+})

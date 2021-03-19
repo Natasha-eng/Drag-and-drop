@@ -8,7 +8,7 @@ type DndFigurePropsType = {
     item: ItemType
 }
 
-export const DndFigure = (props: DndFigurePropsType) => {
+export const DndFigure = React.memo((props: DndFigurePropsType) => {
 
     const dispatch = useDispatch()
 
@@ -22,4 +22,4 @@ export const DndFigure = (props: DndFigurePropsType) => {
             </div>
         </div>
     )
-}
+})

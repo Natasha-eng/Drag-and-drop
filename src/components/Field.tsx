@@ -9,7 +9,7 @@ type FieldPropsType = {
     items: Array<ItemType>
 }
 
-export const Field = ({title, items}: FieldPropsType) => {
+export const Field = React.memo(({title, items}: FieldPropsType) => {
     const dispatch = useDispatch()
 
     const OnEndDraggingFigure = (e: DragEvent<HTMLDivElement>) => {
@@ -27,5 +27,5 @@ export const Field = ({title, items}: FieldPropsType) => {
             {items.map(i => <DndFigure figureStyle={i.class} item={i}/>)}
         </div>
     )
-}
+})
 

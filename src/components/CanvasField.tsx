@@ -10,7 +10,7 @@ type CanvasFieldPropsType = {
     items: Array<CanvasItemType>
 }
 
-export const CanvasField = ({title, items}: CanvasFieldPropsType) => {
+export const CanvasField = React.memo(({title, items}: CanvasFieldPropsType) => {
     const dispatch = useDispatch()
 
     const OnEndDraggingFigure = (e: DragEvent<HTMLDivElement>) => {
@@ -28,4 +28,4 @@ export const CanvasField = ({title, items}: CanvasFieldPropsType) => {
             {items.map(i => <CanvasFigure item={i}/>)}
         </div>
     )
-}
+})

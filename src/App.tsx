@@ -1,17 +1,13 @@
-import React, {DragEvent, MouseEvent} from 'react';
+import React from 'react';
 import './App.module.css';
 import style from './App.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "./redux/store";
 import {
-    addFigure,
     CanvasItemType,
-    changeCanvasStatus,
-    changeFigureStyle, chooseFigure, deleteFigure,
-    dragStarted,
+    deleteFigure,
     ItemType
 } from "./redux/DnDReducer";
-import {DndFigure} from "./components/DndFigure";
 import {CanvasField} from "./components/CanvasField";
 import {Field} from "./components/Field";
 
