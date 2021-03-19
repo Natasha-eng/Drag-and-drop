@@ -40,7 +40,10 @@ export let DnDReducer = (state = initialState, action: ActionsType): InitialStat
             return {
                 ...state,
                 canvasItems: state.canvasItems.map(i => i.canvasId === state.canvasFigureId ?
-                    {...i, figure: {...i.figure, class: {...i.figure.class, border: '2px solid black'}}} : i)
+                    {...i, figure: {...i.figure, class: {...i.figure.class, border: '2px solid black'}}} : {
+                        ...i,
+                        figure: {...i.figure, class: {...i.figure.class, border: "none"}}
+                    })
             }
 
         case ADD_FIGURE:
@@ -91,19 +94,15 @@ export const deleteFigure = (figureId: string) => ({
     figureId
 }) as const
 
-export const addFigure = (): AddFigureActionType => ({
+export const addFigure = () => ({
     type: ADD_FIGURE
 }) as const
-
-type AddFigureActionType = {
-    type: 'ADD_FIGURE'
-}
 
 //types
 type ActionsType = ReturnType<typeof changeCanvasStatus>
     | ReturnType<typeof dragStarted>
     | ReturnType<typeof changeFigureStyle>
-    | AddFigureActionType
+    | ReturnType<typeof addFigure>
     | ReturnType<typeof deleteFigure>
     | ReturnType<typeof chooseFigure>
 
