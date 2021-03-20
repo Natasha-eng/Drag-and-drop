@@ -15,7 +15,10 @@ export const secondItemStyle = {
 }
 
 let initialState: InitialStateType = {
-    canvasFieldId: 1,
+    canvasField: {
+        id: 1,
+        title: 'Canvas'
+    },
     canvasFigureId: '',
     isChosen: false,
     draggableFigureId: null,
@@ -49,7 +52,7 @@ export let DnDReducer = (state = initialState, action: ActionsType): InitialStat
         case ADD_FIGURE:
             let draggableFigure = state.items.find(i => i.id === state.draggableFigureId) as ItemType
 
-            let newFigure = {
+            let newFigure: CanvasItemType = {
                 canvasId: v1(),
                 figure: {...draggableFigure, isCanvas: true}
             }
@@ -114,7 +117,10 @@ export type CanvasItemType = {
 export type ItemType = { id: number, isCanvas: boolean, class: {} }
 
 export type InitialStateType = {
-    canvasFieldId: number
+    canvasField: {
+        id: number,
+        title: string
+    }
     canvasFigureId: string
     isChosen: boolean
     draggableFigureId: number | null
