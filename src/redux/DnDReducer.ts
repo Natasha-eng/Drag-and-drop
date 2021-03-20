@@ -15,6 +15,7 @@ export const secondItemStyle = {
 }
 
 let initialState: InitialStateType = {
+    createCopy: true,
     canvasField: {
         id: 1,
         title: 'Canvas'
@@ -60,6 +61,9 @@ export let DnDReducer = (state = initialState, action: ActionsType): InitialStat
 
         case DELETE_FIGURE:
             return {...state, canvasItems: state.canvasItems.filter(i => i.canvasId !== state.canvasFigureId)}
+
+        case CHANGE_COPY_STATUS:
+            return {...state, createCopy: action.copyStatus}
     }
     return state
 }
@@ -71,6 +75,7 @@ const CHANGE_FIGURE_STYLE = 'CHANGE_FIGURE_STYLE'
 const ADD_FIGURE = 'ADD_FIGURE'
 const DELETE_FIGURE = 'DELETE_FIGURE'
 const CHOOSE_FIGURE = 'CHOOSE_FIGURE'
+const CHANGE_COPY_STATUS = 'CHANGE_COPY_STATUS'
 
 export const changeCanvasStatus = () => ({
     type: CHANGE_CANVAS_STATUS
@@ -101,6 +106,11 @@ export const addFigure = () => ({
     type: ADD_FIGURE
 }) as const
 
+export const changeCopyStatus = (copyStatus: boolean) => ({
+    type: CHANGE_COPY_STATUS,
+    copyStatus
+}) as const
+
 //types
 type ActionsType = ReturnType<typeof changeCanvasStatus>
     | ReturnType<typeof dragStarted>
@@ -108,6 +118,7 @@ type ActionsType = ReturnType<typeof changeCanvasStatus>
     | ReturnType<typeof addFigure>
     | ReturnType<typeof deleteFigure>
     | ReturnType<typeof chooseFigure>
+    | ReturnType<typeof changeCopyStatus>
 
 export type CanvasItemType = {
     canvasId: string,
@@ -117,6 +128,7 @@ export type CanvasItemType = {
 export type ItemType = { id: number, isCanvas: boolean, class: {} }
 
 export type InitialStateType = {
+    createCopy: boolean
     canvasField: {
         id: number,
         title: string

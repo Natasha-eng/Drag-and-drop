@@ -1,4 +1,4 @@
-import {changeCanvasStatus, ItemType} from "../redux/DnDReducer";
+import {changeCanvasStatus, changeCopyStatus, ItemType} from "../redux/DnDReducer";
 import {useDispatch} from "react-redux";
 import React, {DragEvent, useState} from "react";
 import style from "../App.module.css";
@@ -21,8 +21,12 @@ export const Field = React.memo(({title, items}: FieldPropsType) => {
         e.preventDefault()
     }
 
+    const changeCopyStatusHandler = () => {
+        dispatch(changeCopyStatus(true))
+    }
+
     return (
-        <div className={style.field} onDrop={OnEndDraggingFigure} onDragOver={onDragOverHandler}>
+        <div className={style.field} onDrop={OnEndDraggingFigure} onDragOver={onDragOverHandler} onDragStart = {changeCopyStatusHandler}>
             <h1 className={style.fieldTitle}>{title}</h1>
             {items.map(i => <DndFigure figureStyle={i.class} item={i}/>)}
         </div>

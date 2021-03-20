@@ -1,8 +1,9 @@
-import {addFigure, CanvasItemType} from "../redux/DnDReducer";
-import {useDispatch} from "react-redux";
+import {addFigure, CanvasItemType, changeCopyStatus} from "../redux/DnDReducer";
+import {useDispatch, useSelector} from "react-redux";
 import React, {DragEvent} from "react";
 import style from "../App.module.css";
 import {CanvasFigure} from "./CanvasFigure";
+import {RootStateType} from "../redux/store";
 
 
 type CanvasFieldPropsType = {
@@ -12,9 +13,13 @@ type CanvasFieldPropsType = {
 
 export const CanvasField = React.memo(({title, items}: CanvasFieldPropsType) => {
     const dispatch = useDispatch()
+    const copyStatus = useSelector<RootStateType, boolean>(state => state.dndFigures.createCopy)
 
-    const OnEndDraggingFigure = (e: DragEvent<HTMLDivElement>) => {
+    const onDropFigure = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault()
+        if (!copyStatus) {
+            return
+        }
         dispatch(addFigure())
     }
 
@@ -22,8 +27,13 @@ export const CanvasField = React.memo(({title, items}: CanvasFieldPropsType) => 
         e.preventDefault()
     }
 
+    const changeCopyStatusHandler = () => {
+        dispatch(changeCopyStatus(false))
+    }
+
     return (
-        <div className={style.canvasField} onDrop={OnEndDraggingFigure} onDragOver={onDragOverHandler}>
+        <div className={style.canvasField} onDrop={onDropFigure} onDragOver={onDragOverHandler}
+             onDragStart={changeCopyStatusHandler}>
             <h1 className={style.fieldTitle}>{title}</h1>
             {items.map(i => <CanvasFigure item={i}/>)}
         </div>
