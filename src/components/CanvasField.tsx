@@ -17,6 +17,7 @@ export const CanvasField = React.memo(({items, title}: CanvasFieldPropsType) => 
 
     const addFigureOnDropHandler = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault()
+        e.stopPropagation()
         if (!copyStatus) {
             return
         }
