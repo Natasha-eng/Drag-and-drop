@@ -15,7 +15,7 @@ export const CanvasField = React.memo(({items, title}: CanvasFieldPropsType) => 
     const dispatch = useDispatch()
     const copyStatus = useSelector<RootStateType, boolean>(state => state.dndFigures.createCopy)
 
-    const onDropFigure = (e: DragEvent<HTMLDivElement>) => {
+    const addFigureOnDropHandler = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault()
         if (!copyStatus) {
             return
@@ -28,7 +28,7 @@ export const CanvasField = React.memo(({items, title}: CanvasFieldPropsType) => 
     }
 
     return (
-        <div className={style.canvasField} onDrop={onDropFigure} onDragStart={changeCopyStatusHandler}>
+        <div className={style.canvasField} onDrop={addFigureOnDropHandler} onDragStart={changeCopyStatusHandler}>
             <h1 className={style.fieldTitle}>{title}</h1>
             <div className={style.figureWrapper}>
                 {items.map(i => <CanvasFigure item={i}/>)}

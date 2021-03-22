@@ -21,12 +21,16 @@ function App() {
         dispatch(deleteFigure(canvasFigureId))
     }
 
+    const deleteCanvasFigureOutsideCanvas = () => {
+        dispatch(deleteFigure(canvasFigureId))
+    }
+
     const onDragOverHandler = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault()
     }
 
     return (
-        <div className={style.app} onDragOver={onDragOverHandler}>
+        <div className={style.app} onDragOver={onDragOverHandler} onDrop={deleteCanvasFigureOutsideCanvas}>
             <button className={style.deleteButton} onClick={deleteItemHandler}>Delete Figure
             </button>
             <div className={style.fieldsContainer}>
