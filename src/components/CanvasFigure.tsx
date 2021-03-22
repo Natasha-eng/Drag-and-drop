@@ -18,10 +18,9 @@ export const CanvasFigure = React.memo((props: CanvasFigurePropsType) => {
         }
     }
 
-    debugger
     return (
         <div draggable className={style.figures}>
-            <div draggable style={props.item.figure.class} onClick={(e) => chooseFigureHandler(e)}>
+            <div draggable style={props.item.figure.class} onClick={chooseFigureHandler}>
             </div>
         </div>
     )

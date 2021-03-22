@@ -1,6 +1,6 @@
 import {changeCanvasStatus, changeCopyStatus, ItemType} from "../redux/DnDReducer";
 import {useDispatch} from "react-redux";
-import React, {DragEvent, useState} from "react";
+import React, {DragEvent} from "react";
 import style from "../App.module.css";
 import {DndFigure} from "./DndFigure";
 

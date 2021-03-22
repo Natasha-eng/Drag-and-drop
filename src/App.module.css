@@ -1,8 +1,16 @@
+* {
+    margin: 0;
+    badding: 0;
+    box-sizing: border-box;
+}
+
 .app {
     text-align: center;
     display: flex;
     flex-direction: column;
-    width: 80vw;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .fieldsContainer {
@@ -33,6 +41,8 @@
     text-align: center;
     border-bottom: 1px solid black;
     width: 100%;
+    padding: 5px 0;
+    background-color: darkgray;
 }
 
 .figures {

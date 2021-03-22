@@ -16,10 +16,6 @@ export const secondItemStyle = {
 
 let initialState: InitialStateType = {
     createCopy: true,
-    canvasField: {
-        id: 1,
-        title: 'Canvas'
-    },
     canvasFigureId: '',
     isChosen: false,
     draggableFigureId: null,
@@ -111,6 +107,7 @@ export const changeCopyStatus = (copyStatus: boolean) => ({
     copyStatus
 }) as const
 
+
 //types
 type ActionsType = ReturnType<typeof changeCanvasStatus>
     | ReturnType<typeof dragStarted>
@@ -129,10 +126,6 @@ export type ItemType = { id: number, isCanvas: boolean, class: {} }
 
 export type InitialStateType = {
     createCopy: boolean
-    canvasField: {
-        id: number,
-        title: string
-    }
     canvasFigureId: string
     isChosen: boolean
     draggableFigureId: number | null

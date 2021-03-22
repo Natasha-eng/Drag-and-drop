@@ -7,11 +7,11 @@ import {RootStateType} from "../redux/store";
 
 
 type CanvasFieldPropsType = {
-    title: string
     items: Array<CanvasItemType>
+    title: string
 }
 
-export const CanvasField = React.memo(({title, items}: CanvasFieldPropsType) => {
+export const CanvasField = React.memo(({items, title}: CanvasFieldPropsType) => {
     const dispatch = useDispatch()
     const copyStatus = useSelector<RootStateType, boolean>(state => state.dndFigures.createCopy)
 
@@ -23,19 +23,17 @@ export const CanvasField = React.memo(({title, items}: CanvasFieldPropsType) => 
         dispatch(addFigure())
     }
 
-    const onDragOverHandler = (e: DragEvent<HTMLDivElement>) => {
-        e.preventDefault()
-    }
-
     const changeCopyStatusHandler = () => {
         dispatch(changeCopyStatus(false))
     }
 
     return (
-        <div className={style.canvasField} onDrop={onDropFigure} onDragOver={onDragOverHandler}
-             onDragStart={changeCopyStatusHandler}>
+        <div className={style.canvasField} onDrop={onDropFigure} onDragStart={changeCopyStatusHandler}>
             <h1 className={style.fieldTitle}>{title}</h1>
-            {items.map(i => <CanvasFigure item={i}/>)}
+            <div className={style.figureWrapper}>
+                {items.map(i => <CanvasFigure item={i}/>)}
+            </div>
+
         </div>
     )
 })
